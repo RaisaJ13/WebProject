@@ -1,22 +1,24 @@
 import React from "react";
 import img from "../assets/img/logo.jpeg";
 import Button from "../layouts/Button";
+import { useNavigate } from "react-router";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className=" min-h-screen flex flex-col justify-center lg:flex-row lg:justify-between items-center lg:px-32 px-5 gap-10 bg-gradient-to-r from-[#FFDCAB] to-[#AB6B2E] ">
       <div className=" w-full lg:w-2/4 space-y-4 mt-14 lg:mt-0">
         <h1 className="font-semibold text-5xl text-center lg:text-start leading-tight">
-        Start learning language with WeLearners.
+          Start learning language with WeLearners.
         </h1>
         <p>
-        Embark on a language learning and be productive
-        with for a better future.
+          Embark on a language learning and be productive with for a better
+          future.
         </p>
 
         <div className=" flex flex-row gap-6">
-          <Button title="Login" />
-          <Button title="Register" />
+          <Button title="Login" onClick={() => navigate("/login")} />
+          <Button title="Register" onClick={() => navigate("/register")} />
         </div>
       </div>
 

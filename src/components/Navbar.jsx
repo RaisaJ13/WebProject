@@ -4,9 +4,19 @@ import { SiCoffeescript } from "react-icons/si";
 import Button from "../layouts/Button";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
+import { useLocation, useNavigate } from "react-router";
+import { navItems } from "../constant";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavLinkClick = () => {
+    if (location.pathname === "/login" || location.pathname === "/register") {
+      navigate("/");
+    }
+  };
 
   const handleChange = () => {
     setMenu(!menu);
@@ -21,65 +31,24 @@ const Navbar = () => {
       <div>
         <div className=" flex flex-row justify-between p-5 lg:px-32 px-5 bg-gradient-to-r from-backgroundColor to-brightColor shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           <div className=" flex flex-row items-center cursor-pointer gap-2">
-            
             <h1 className=" text-xl font-semibold">WeLearners</h1>
           </div>
 
           <nav className="hidden md:flex flex-row items-center text-lg font-medium gap-8">
-            <Link
-              to="home"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="group relative inline-block cursor-pointer hover:text-brightColor"
-            >
-              Home
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></span>
-            </Link>
-
-            <Link
-              to="menu"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="group relative inline-block cursor-pointer hover:text-brightColor"
-            >
-              Courses
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></span>
-            </Link>
-
-            <Link
-              to="about"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="group relative inline-block cursor-pointer hover:text-brightColor"
-            >
-              About Us
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></span>
-            </Link>
-
-            <Link
-              to="products"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="group relative inline-block cursor-pointer hover:text-brightColor"
-            >
-              Tests
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></span>
-            </Link>
-
-            <Link
-              to="review"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="group relative inline-block cursor-pointer hover:text-brightColor"
-            >
-              Reviews
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></span>
-            </Link>
+            {navItems.map((element, idx) => (
+              <Link
+                key={idx}
+                to={element.to}
+                spy={true}
+                smooth={true}
+                duration={500}
+                className="group relative inline-block cursor-pointer hover:text-brightColor"
+                onClick={handleNavLinkClick}
+              >
+                {element.item}
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transition-transform group-hover:scale-x-100"></span>
+              </Link>
+            ))}
           </nav>
 
           <div className=" hidden lg:flex">
@@ -117,7 +86,7 @@ const Navbar = () => {
             className="hover:text-brightColor transition-all cursor-pointer"
             onClick={closeMenu}
           >
-           Courses
+            Courses
           </Link>
           <Link
             to="about"
@@ -149,7 +118,7 @@ const Navbar = () => {
           >
             Reviews
           </Link>
-          <Button title="Change mode"/>
+          <Button title="Change mode" />
         </div>
       </div>
     </div>

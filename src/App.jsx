@@ -1,41 +1,26 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Menu from "./components/Menu";
-import About from "./components/About";
-import Product from "./components/Product";
-import Review from "./components/Review";
 import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-
-      <main>
-        <div id="home">
-          <Home />
-        </div>
-
-        <div id="menu">
-          <Menu />
-        </div>
-
-        <div id="about">
-          <About />
-        </div>
-
-        <div id="products">
-          <Product />
-        </div>
-
-        <div id="review">
-          <Review />
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div>
+        <Navbar />
+        <main>
+          <Routes>
+            <Route element={<HomePage />} path="/" />
+            <Route element={<Login />} path="/login" />
+            <Route element={<Register />} path="/register" />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 };
 
